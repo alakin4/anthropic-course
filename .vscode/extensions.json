@@ -1,0 +1,38 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.debugpy",
+    "ms-python.vscode-pylance",
+    "ms-toolsai.jupyter",
+    "GitHub.copilot",
+    "tamasfe.even-better-toml",
+    // Python autoformatter
+    "charliermarsh.ruff",
+    // Allows you abut more flexibility in how you define your comments !,?, TODO
+    "aaron-bond.better-comments",
+    // Can help you view your workflows
+    "github.vscode-github-actions",
+    // For making diagrams
+    "bierner.markdown-mermaid",
+    // Can help you view the contents of the database
+    "alexcvzz.vscode-sqlite",
+    // Allows tyou to open any oflder or repository inside a docker container
+    "ms-vscode-remote.remote-containers",
+    // Paste JSON as Code
+    "quicktype.quicktype",
+    // .env syntax highlighting
+    "mikestead.dotenv",
+    // File icons
+    "vscode-icons-team.vscode-icons",
+    // Spell checker
+    "streetsidesoftware.code-spell-checker",
+    // For API testing
+    "postman.postman-for-vscode",
+    // Thunder Client for API requests
+    "rangav.vscode-thunder-client",
+    // Mermaid preview for Markdown
+    "bierner.markdown-mermaid",
+    // Show gutter previews for images
+    "kisstkondoros.vscode-gutter-preview"
+  ]
+}

@@ -1,0 +1,106 @@
+[project]
+name = "python-template"
+description = "A template for Python projects."
+version = "1.1.0"
+requires-python = ">=3.13"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.distutils.bdist_wheel]
+universal = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[dependency-groups]
+dev = [
+    "pandas>=2.2.3",
+    "pydantic>=2.11.3",
+    "pyright>=1.1.399",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "python-dotenv>=1.1.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = "."
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+target-version = "py313"
+
+exclude = ["jupyter_notebook_config.py", ".ruff_cache", "node_modules"]
+
+select = [
+    "E", # pycodestyle errors (settings from FastAPI)
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "I", # isort
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+]
+
+ignore = [
+    "E501", # line too long
+    "C901", # too complex
+]
+
+[tool.ruff.isort]
+order-by-type = true
+relative-imports-order = "closest-to-furthest"
+extra-standard-library = ["typing"]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+known-first-party = []
+
+[tool.ruff.lint]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Like Black, use 88 characters per line.
+docstring-code-format = true
+docstring-code-line-length = 88
+
+
+[tool.pyright]
+exclude = [".venv", "dist"]
+pythonVersion = "3.13"
+venvPath = "."
+venv = ".venv"
+autoSearchPaths = true
+
+# Suppress "import not found" errors
+reportMissingImports = false
+
+# Add your src/ folder to the import path
+extraPaths = ["src"]
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = [
+    "missing-module-docstring",
+]

@@ -1,0 +1,33 @@
+repos:
+  # First check if the lock file is synced with the toml file
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    # uv version.
+    rev: 0.6.14
+    hooks:
+      - id: uv-lock
+  # Ruff hook
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.11.6
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
+  # Pyright in our own env for it to validate our imports. Pointing to the venv is set up in 
+  # pyproject.toml
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.399
+    hooks:
+      - id: pyright
+
+  # Local hook for the tests
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: ./.venv/bin/pytest tests
+        language: python
+        pass_filenames: false
+        always_run: true

@@ -1,0 +1,28 @@
+{
+  // Editor settings
+  "editor.defaultFormatter": "charliermarsh.ruff",
+  "editor.formatOnSave": true,
+
+  // Spelling
+  "cSpell.words": ["uvx", "pyright", "pytest", "dotenv", "venv"],
+
+  //Python settings
+  // Uncomment if not set in pyproject.toml under [tool.pyright]
+  //"python.analysis.autoSearchPaths": true,
+  //"python.analysis.diagnosticSeverityOverrides": {
+  //  "reportMissingImports": "none"
+  //},
+  //"python.analysis.extraPaths": ["${workspaceFolder}/src"],
+  "python.analysis.autoImportCompletions": true,
+
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.terminal.activateEnvironment": true,
+  "rewrap.autoWrap.enabled": true,
+  "rewrap.reformat": true,
+  "rewrap.wrappingColumn": 88,
+  // Test settings
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.cwd": "${workspaceFolder}/tests",
+  "python.testing.autoTestDiscoverOnSaveEnabled": true
+}
