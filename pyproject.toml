@@ -1,9 +1,11 @@
 [project]
-name = "python-template"
-description = "A template for Python projects."
+name = "anthropic-course"
+description = "Based off a template for Python projects."
 version = "1.1.0"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "anthropic>=0.109.1",
+]
 
 [build-system]
 requires = ["hatchling"]
