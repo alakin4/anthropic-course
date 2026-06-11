@@ -20,11 +20,13 @@ def chat_with_system_prompt(
     model,
     messages,
     system_prompt=None,
+    temperature=0.1,
 ):
     params = {
         "model": model,
         "max_tokens": 1000,
         "messages": messages,
+        "temperature": temperature,
     }
     if system_prompt:
         params["system"] = system_prompt
