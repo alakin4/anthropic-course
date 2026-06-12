@@ -33,3 +33,27 @@ def chat_with_system_prompt(
 
     response = client.messages.create(**params)
     return response.content[0].text
+
+
+def chat_extended(
+    client,
+    model,
+    messages,
+    system_prompt=None,
+    temperature=0.1,
+    stop_sequences=None,
+):
+    params = {
+        "model": model,
+        "max_tokens": 1000,
+        "messages": messages,
+        "temperature": temperature,
+    }
+    if system_prompt:
+        params["system"] = system_prompt
+
+    if stop_sequences:
+        params["stop_sequences"] = stop_sequences
+
+    response = client.messages.create(**params)
+    return response.content[0].text
