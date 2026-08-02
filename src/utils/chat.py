@@ -1,4 +1,5 @@
 from typing import Any
+import re
 def add_user_message(messages: list[dict[str, str]], text: str) -> None:
     messages.append({"role": "user", "content": text})
 
@@ -45,7 +46,7 @@ def chat_extended(
     temperature: float = 0.1,
     max_tokens: int = 1000,
     stop_sequences: list[str] | None = None,
-):
+)-> list[str]:
     if not messages:
         raise ValueError("Messages list cannot be empty.")
 
@@ -72,3 +73,37 @@ def chat_extended(
     if not text_blocks:
         raise ValueError("No text content returned from the model.")
     return text_blocks
+
+def combine_text_blocks(text_blocks: list[str]) -> str:
+
+    """Combine text blocks and remove surrounding Markdown code fences."""
+
+    text = "".join(text_blocks).strip()
+
+    # Remove an opening fence such as ```json, ```JSON, or ```
+
+    text = re.sub(
+
+        r"^\s*```(?:json)?\s*",
+
+        "",
+
+        text,
+
+        flags=re.IGNORECASE,
+
+    )
+
+    # Remove a closing fence
+
+    text = re.sub(
+
+        r"\s*```\s*$",
+
+        "",
+
+        text,
+
+    )
+
+    return text.strip()
