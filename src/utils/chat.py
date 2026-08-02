@@ -1,8 +1,9 @@
-def add_user_message(messages, text):
+from typing import Any
+def add_user_message(messages: list[dict[str, str]], text: str) -> None:
     messages.append({"role": "user", "content": text})
 
 
-def add_assistant_message(messages, text):
+def add_assistant_message(messages: list[dict[str, str]], text: str) -> None:
     messages.append({"role": "assistant", "content": text})
 
 
@@ -36,16 +37,25 @@ def chat_with_system_prompt(
 
 
 def chat_extended(
-    client,
-    model,
-    messages,
-    system_prompt=None,
-    temperature=0.1,
-    stop_sequences=None,
+    client: Any,
+    model: str,
+    messages: list[dict[str, str]],
+    *,
+    system_prompt: str | None = None,
+    temperature: float = 0.1,
+    max_tokens: int = 1000,
+    stop_sequences: list[str] | None = None,
 ):
+    if not messages:
+        raise ValueError("Messages list cannot be empty.")
+
+    if messages[-1]["role"] == "assistant":
+        raise ValueError("The conversation cannot end with an assistant message." \
+        "Assistant prefilling is not supported by selected model.")
+    
     params = {
         "model": model,
-        "max_tokens": 1000,
+        "max_tokens": max_tokens,
         "messages": messages,
         "temperature": temperature,
     }
@@ -56,4 +66,9 @@ def chat_extended(
         params["stop_sequences"] = stop_sequences
 
     response = client.messages.create(**params)
-    return response.content[0].text
+
+    text_blocks = [content.text for content in response.content if hasattr(content, "text")]
+
+    if not text_blocks:
+        raise ValueError("No text content returned from the model.")
+    return text_blocks
